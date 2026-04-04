@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: bookshelf-front
+    labels:
+      name: apache
+      version: "4"
+      managed-by: Devop
+      component: frontend
+      part-of: bookshelf
+      instance: feb2025
+      env: test
+      client: xyz
+spec:
+  containers:
+  - name: boxone
+    image: docker.io/library/nginx:latest
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+    name: bookshel-back
+    labels:
+      name: mysql
+      version: "10"
+      managed-by: db
+      component: backend
+      part-of: bookshelf
+      instance: april2024
+      env: prod
+      client: xyz
+spec:
+  containers:
+  - name: boxone
+    image: docker.io/library/nginx:latest
+    ports:
+    - containerPort: 80

@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: store-front
+    labels:
+      name: apache
+      version: "5"
+      managed-by: ifra
+      component: frontend
+      part-of: store
+      instance: mar2025
+      env: dev
+      client: adidas
+spec:
+  containers:
+  - name: boxone
+    image: docker.io/library/nginx:latest
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+    name: store-back
+    labels:
+      name: mariadb
+      version: "10"
+      managed-by: devops
+      component: backend
+      part-of: store
+      instance: aug2024
+      env: dev
+      client: adidas
+spec:
+  containers:
+  - name: boxone
+    image: docker.io/library/nginx:latest
+    ports:
+    - containerPort: 80
