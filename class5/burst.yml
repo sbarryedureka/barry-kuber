@@ -1,0 +1,24 @@
+apiVersion: v1
+Kind: Pod
+metadata:
+  name: burst-app
+  labels: 
+    name: apache
+    version: "3.4"
+    managed-by: devops
+    instance: jan2025
+    component: frontend:
+    part-of: employee
+spec:
+  containers:
+  - name: boxone
+    image: docker.io/lovelearnlinux/webserver:v1
+    ports:
+    - containerPrort: 80
+    ressources:
+      limits:
+        cpu: 200m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128mi
