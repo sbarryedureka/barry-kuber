@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: employee-front
+    labels:
+      name: nginx
+      version: "3.4"
+      managed-by: IT
+      component: frontend
+      part-of: employee
+      instance: jan2025
+      env: prod
+      client: abc
+spec:
+  containers:
+  - name: boxone
+    image: docker.io/library/nginx:latest
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+    name: employee-back
+    labels:
+      name: mysql
+      version: "10"
+      managed-by: db
+      component: backend
+      part-of: employess
+      instance: july2024
+      env: prod
+      client: abc
+spec:
+  containers:
+  - name: boxone
+    image: docker.io/library/nginx:latest
+    ports:
+    - containerPort: 80
