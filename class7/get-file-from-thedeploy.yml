@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"redis"},"name":"dbapp-deployment","namespace":"default"},"spec":{"replicas":4,"selector":{"matchLabels":{"app":"redis"}},"template":{"metadata":{"labels":{"app":"redis"}},"spec":{"containers":[{"image":"registry.access.redhat.com/ubi8/httpd-24:latest","name":"nginx","ports":[{"containerPort":8080}]}]}}}}
+  creationTimestamp: "2026-04-04T19:14:05Z"
+  generation: 5
+  labels:
+    app: redis
+  name: dbapp-deployment
+  namespace: default
+  resourceVersion: "422830"
+  uid: 31801306-7675-4e4a-b71d-51554400b4c2
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 6
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: redis
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: redis
+    spec:
+      containers:
+      - image: registry.access.redhat.com/ubi8/httpd-24:latest
+        imagePullPolicy: Always
+        name: nginx
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 4
+  conditions:
+  - lastTransitionTime: "2026-04-04T19:34:17Z"
+    lastUpdateTime: "2026-04-04T19:35:11Z"
+    message: ReplicaSet "dbapp-deployment-c56bcf669" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2026-04-05T14:41:25Z"
+    lastUpdateTime: "2026-04-05T14:41:25Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 5
+  readyReplicas: 4
+  replicas: 4
+  updatedReplicas: 4
