@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-1
+  labels:
+    app: nginx
+  annotations:
+    kubernetes.io/change-cause: "version 1 deployed on customer request April 2026"
+spec:
+  revisionHistoryLimit: 5
+  replicas: 10
+  selector:
+    matchLabels:
+      app: nginx
+  minReadySeconds: 10
+  strategy:
+     type: RollingUpdate
+     rollingUpdate:
+        maxUnavailable: 1
+        maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:stable-alpine3.23-perl
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
